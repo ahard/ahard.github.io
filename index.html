@@ -6,16 +6,15 @@
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 	</head>
 	<body>
-		<nav>
-    				</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Hi there, I'm aHard!</h1>
-				<p>I'm best known as one of the <em>fab five</em> A nice gal. <a href="/about">Read more about my life...</a></p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    	
-		</footer>
+		<script type="text/javascript">
+		
+			var dataset = [ 5, 10, 15, 20, 25 ];
+			
+			d3.select("body").selectAll("p")
+				.data(dataset)
+				.enter()
+				.append("p")
+				.text(function(d) { return d; });
+		</script>
 	</body>
 </html>
