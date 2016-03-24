@@ -3,40 +3,24 @@
     <head>
         <meta charset="utf-8">
             <title></title>
+            <link rel="stylesheet" type="text/css" href="csvtable.css" title="style" />
+            <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+            <script type="text/javascript" src="js/jquery.csvToTable.js"></script>
+            <script type="text/javascript" src="js/jquery.tablesorter.dev.js"></script>
             <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
     <body>
         <script type="text/javascript">
             
-            var dataset = [ 5, 10, 15, 20, 25 ];
+            var dataset = [];
             
-            d3.select("body").selectAll("p")
-            .data(dataset)
-            .enter()
-            .append("p")
-            .text(function(d) {
-                  return "I can count up to " + d;
-                  })
-                  .style("color", function(d) {
-                         if (d > 15) {	//Threshold of 15
-                         return "red";
-                         } else {
-                         return "black";
-                         }
-                         });
+            d3.csv("count_2003.csv", function(data) {
+                dataset= data.map(function(d) {return [+d["district"],+d["count"]];});
+                console.log(dataset)
+            }
+            
+                        
             </script>
     </body>
-    <style type="text/css">
-    body {
-        font: 24px Arial, sans-serif;
-        font-weight: bold;
-    }
-</style>
-<svg width="500" height="300">
-    <rect x="0" y="120" width="80" height="80" fill="rgba(128, 0, 128, 1.0)" stroke="gray" stroke-width="2"/>
-    <rect x="50" y="100" width="80" height="80" fill="rgba(0, 0, 255, 0.8)" stroke="gray" stroke-width="2"/>
-    <rect x="100" y="80" width="80" height="80" fill="rgba(0, 255, 0, 0.6)" stroke="gray" stroke-width="2"/>
-    <rect x="150" y="60" width="80" height="80" fill="rgba(255, 255, 0, 0.4)" stroke="gray" stroke-width="2"/>
-    <rect x="200" y="40" width="80" height="80" fill="rgba(255, 0, 0, 0.2)" stroke="gray" stroke-width="2"/>
-</svg>
+    
 
 </html>
