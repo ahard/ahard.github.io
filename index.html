@@ -44,6 +44,7 @@
         data = data.map(function(d){ 
         d["Ratio"] = +d["Ratio"]; 
         return d;
+        });
         
       //yscale's domain is from zero to the maximum "Median Price" in your data
         yScale.domain([0, d3.max(data, function(d){ return d["Ratio"]; })]);
