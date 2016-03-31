@@ -18,27 +18,27 @@
         width  = 800,
         height = 500;
 
-  var svg = d3.select("body")
-    .append("svg")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("viewBox", "0 0 " + width + " " + height);
+      var svg = d3.select("body")
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("viewBox", "0 0 " + width + " " + height);
     
-  var yScale = d3.scale.linear()
-    .range([height - margin.top - margin.bottom, 0]);
-
-  var xScale = d3.scale.ordinal()
-    .rangeRoundBands([0, width - margin.right - margin.left], .1;
+      var yScale = d3.scale.linear()
+        .range([height - margin.top - margin.bottom, 0]);
     
-    var xAxis = d3.svg.axis()
-      .scale(xScale)
-      .orient("bottom");
-
-    var yAxis = d3.svg.axis()
-      .scale(yScale)
-      .orient("left");
+      var xScale = d3.scale.ordinal()
+        .rangeRoundBands([0, width - margin.right - margin.left], .1;
+    
+        var xAxis = d3.svg.axis()
+          .scale(xScale)
+          .orient("bottom");
+    
+        var yAxis = d3.svg.axis()
+          .scale(yScale)
+          .orient("left");
       
-    d3.csv("ratioCentral.csv", function(error, data){
+        d3.csv("ratioCentral.csv", function(error, data){
 
       //map function goes through every element, then returns a number for median price
         data = data.map(function(d){ 
@@ -51,33 +51,29 @@
       //xscale is unique values in your data (Age Group, since they are all different)
         xScale.domain(data.map(function(d){ return d["District"]; }));
         
-      svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        .selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d){ return xScale(d["District"]); })
-        .attr("y", function(d){ return yScale(d["Ratio"]); })
-        .attr("height", function(d){ return height - margin.top - margin.bottom - yScale(d["Ratio"]); })
-        .attr("width", function(d){ return xScale.rangeBand(); });
+          svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d){ return xScale(d["District"]); })
+            .attr("y", function(d){ return yScale(d["Ratio"]); })
+            .attr("height", function(d){ return height - margin.top - margin.bottom - yScale(d["Ratio"]); })
+            .attr("width", function(d){ return xScale.rangeBand(); });
         
-        //adding y axis to the left of the chart
-      svg.append("g")
-        .attr("class", "y axis")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        .call(yAxis);
+            //adding y axis to the left of the chart
+          svg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .call(yAxis);
 
-      //adding x axis to the bottom of chart
-      svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(" + margin.left + "," + (height - margin.bottom) + ")")
-        .call(xAxis);
-        
-        
-})
-
+          //adding x axis to the bottom of chart
+          svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(" + margin.left + "," + (height - margin.bottom) + ")")
+            .call(xAxis);
 
 })
 
